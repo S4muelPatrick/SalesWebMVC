@@ -19,13 +19,24 @@ namespace SalesWebMVC.Controllers
             _context = context;
         }
 
+        public IActionResult Index()
+        {
+            List<Department> list = new List<Department>();
+            list.Add(new Department { id = 1, Name = "Eletronics" });
+            list.Add(new Department { id = 2, Name = "Fashion" });
+            list.Add(new Department { id = 3, Name = "Programming" });
+            list.Add(new Department { id = 4, Name = "Fit" });
+
+            return View(list);
+        }
+
         // GET: Departments
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
               return _context.Department != null ? 
                           View(await _context.Department.ToListAsync()) :
                           Problem("Entity set 'SalesWebMVCContext.Department'  is null.");
-        }
+        }*/
 
         // GET: Departments/Details/5
         public async Task<IActionResult> Details(int? id)
