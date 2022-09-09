@@ -36,7 +36,7 @@ namespace SalesWebMVC.Controllers
             }
 
             var department = await _context.Department
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (department == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace SalesWebMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Name")] Department department)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Department department)
         {
             if (ModelState.IsValid)
             {
@@ -88,9 +88,9 @@ namespace SalesWebMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Name")] Department department)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Department department)
         {
-            if (id != department.id)
+            if (id != department.Id)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace SalesWebMVC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DepartmentExists(department.id))
+                    if (!DepartmentExists(department.Id))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace SalesWebMVC.Controllers
             }
 
             var department = await _context.Department
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (department == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace SalesWebMVC.Controllers
 
         private bool DepartmentExists(int id)
         {
-          return (_context.Department?.Any(e => e.id == id)).GetValueOrDefault();
+          return (_context.Department?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
