@@ -10,6 +10,10 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+//builder.Services.AddTransient<ISeedingService, SeedingService>
+
+//pp.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingService>().Seed();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
