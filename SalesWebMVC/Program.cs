@@ -8,10 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SalesWebMVCContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SalesWebMVCContext") ?? throw new InvalidOperationException("Connection string 'SalesWebMVCContext' not found.")));
 
+ void ConfigureServices(IServiceCollection services)
+{
+    services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+    services.AddTransient<ISalesRecordRepository, SalesRecordRepository>();
+    services.AddTransient<ISellerRepository, SellerRepository>();
+    //services.AddTransient<ISeedingRepository, SeedingRepository>();
+
+    services.AddControllersWithViews();
+}
+builder.Services.AddControllersWithViews();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddTransient<ISeedingRepository, SeedingRepository>();
 
 var app = builder.Build();
 
