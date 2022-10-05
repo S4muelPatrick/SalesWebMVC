@@ -1,27 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SalesWebMVC.Data;
+﻿
+using SalesWebMVC.Models;
+using System;
 using SalesWebMVC.Models.Enums;
-
+using SalesWebMVC.Data;
 
 namespace SalesWebMVC.Models
 {
-    public class SeedingService
+    public class SeedingSevice
     {
-        private SalesWebMVCContext _context1;
+        private SalesWebMVCContext _context;
 
-        public SeedingService(SalesWebMVCContext context)
+        public SeedingSevice(SalesWebMVCContext context)
         {
-            _context1 = context;
+            _context = context;
         }
 
         public void Seed()
         {
             //Any -> Test if there's any data in BD(Registers in table)
-            if (_context1.Department.Any() ||
-                _context1.Seller.Any() ||
-                _context1.SalesRecord.Any())
+            if (_context.Department.Any() ||
+                _context.Seller.Any() ||
+                _context.SalesRecord.Any())
             {
                 return;// DB has been seeded(populado) 
             }
@@ -71,18 +70,18 @@ namespace SalesWebMVC.Models
             SalesRecord r30 = new SalesRecord(30, new DateTime(2018, 10, 12), 5000.0, SaleStatus.Billed, s2);
 
             //AddRange allows add more thab one object at once in BD
-            _context1.Department.AddRange(d1, d2, d3, d4);
+            _context.Department.AddRange(d1, d2, d3, d4);
 
-            _context1.Seller.AddRange(s1, s2, s3, s4, s5, s6);
+            _context.Seller.AddRange(s1, s2, s3, s4, s5, s6);
 
-            _context1.SalesRecord.AddRange(
+            _context.SalesRecord.AddRange(
                 r1, r2, r3, r4, r5, r6, r7, r8, r9, r10,
                 r11, r12, r13, r14, r15, r16, r17, r18, r19, r20,
                 r21, r22, r23, r24, r25, r26, r27, r28, r29, r30
             );
 
             //Save and confirm the BD's alterations
-            _context1.SaveChanges();
+            _context.SaveChanges();
 
         }
     }

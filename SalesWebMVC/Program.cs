@@ -1,22 +1,39 @@
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebMVC.Data;
 using SalesWebMVC.Repositories;
 using SalesWebMVC.Repositories.Interface;
+//using SalesWebMVC.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SalesWebMVCContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SalesWebMVCContext") ?? throw new InvalidOperationException("Connection string 'SalesWebMVCContext' not found.")));
 
- void ConfigureServices(IServiceCollection services)
-{
-    services.AddTransient<IDepartmentRepository, DepartmentRepository>();
-    services.AddTransient<ISalesRecordRepository, SalesRecordRepository>();
-    services.AddTransient<ISellerRepository, SellerRepository>();
-    //services.AddTransient<ISeedingRepository, SeedingRepository>();
+//builder.Services.AddScoped<>
 
-    services.AddControllersWithViews();
-}
+
+
+
+
+
+
+
+
+
+
+/*void  SeedData(IHost app)
+{
+    var scopedFactory = app.Services.GetServices<IServiceFactory>();
+
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scopedFactory.ServiceProvider.GetServices<SeedingService>();
+        service.Seed();
+    }
+}*/
+
 builder.Services.AddControllersWithViews();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -24,9 +41,6 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-//builder.Services.AddTransient<ISeedingService, SeedingService>
-
-//pp.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingService>().Seed();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -46,5 +60,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{Id?}");
+
 
 app.Run();

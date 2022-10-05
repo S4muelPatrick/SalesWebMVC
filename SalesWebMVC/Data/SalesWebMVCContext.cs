@@ -9,7 +9,6 @@ namespace SalesWebMVC.Data
 {
     public class SalesWebMVCContext : DbContext
     {
-        //internal IEnumerable<SeedingService> seedingServices;
 
         public SalesWebMVCContext (DbContextOptions<SalesWebMVCContext> options)
             : base(options)
